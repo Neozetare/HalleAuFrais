@@ -1,5 +1,5 @@
 <?php
 
-define('BASE_URI', 'http://localhost/exp/loadWORefresh/');
+define('BASE_URI', 'http://localhost/HalleAuFrais/');
 
 ?>
