@@ -1,0 +1,14 @@
+{
+    "name": "Halle au Frais",
+    "icons": [
+        {
+            "src": "public/img/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#385b76",
+    "background_color": "#385b76",
+    "display": "standalone",
+    "orientation": "portrait"
+}

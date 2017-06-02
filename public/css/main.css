@@ -1,9 +1,445 @@
-body {
-	background: #222;
-	font-family: "Raleway";
-	color: #e6e6e6;
+/************************/
+/*** DOCUMENT GENERAL ***/
+/************************/
+
+html {
+	height: 100%;
+	font-size: 62.5%;
+}
+@media handheld, only screen and (max-width: 768px) {
+	html { font-size: 2.2vw; }
+}
+@media handheld, only screen and (min-device-width: 768px) and (max-width: 1024px) {
+	html { font-size: 1.1vw; }
 }
 
-a {
-	color: #aaf;
+body {
+	height: 100%;
+	font-family: "Fira Sans Condensed", sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	overflow-y: auto;
+}
+body.menu-open {overflow-y: hidden; }
+
+a { text-decoration: none; }
+img { display: block; }
+
+.icon {
+	position: absolute;
+	width: 3rem;
+	height: 3rem;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.icon .menu-icon-line {
+	position: absolute;
+	width: 100%;
+	height: 0.3em;
+	border-radius: 0.2em;
+}
+.menu-icon-line-1 { top: 0; }
+.menu-icon-line-2 { top: calc(50% - 0.2em); }
+.menu-icon-line-3 { top: calc(100% - 0.4em); }
+
+/**************/
+/*** SLIDER ***/
+/**************/
+
+#slider {
+	position: fixed;
+	z-index: 100;
+	width: 75%;
+	max-width: 41rem;
+	height: 100%;
+	left: -100%;
+	top: 0;
+	padding-bottom: 25vh;
+	background: #385b76;
+	overflow: hidden;
+	transition: 0.2s ease-in-out;
+}
+body.menu-open #slider { left: 0; }
+
+#slider p { color: white; }
+
+#slider #menu {
+	margin-top: 1.5rem;
+	font-weight: 200;
+	font-family: "Fira Sans";
+}
+
+#slider #menu a {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	left: -3rem;
+	margin-bottom: -1.5rem;
+	padding: 1.8em 3rem;
+}
+#slider #menu [class*="col-"]:not(:last-child) a {
+	border-bottom: 0.1rem solid rgba(181, 215, 171, 0.3);
+}
+
+#slider #menu a .container { font-size: 2.2rem; }
+
+#slider #menu a .container>* {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
+#slider #menu a .container img {
+	height: 1em;
+	width: 1em;
+	margin-right: 0.3em;
+}
+
+#slider #infos {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 25vh;
+	padding: 3rem;
+	font-family: "Fira Sans Condensed";
+	font-weight: 200;
+}
+
+#slider #infos>* {
+	margin: 1em 0 0.5em;
+	font-size: 1.8rem;
+}
+#slider #infos>*:first-child { margin-top: 0; }
+#slider #infos>*:last-child { margin-bottom: 0; }
+
+#slider #infos p { margin: 0.2em 0; }
+
+#slider #infos h4, #slider #infos span {
+	text-transform: uppercase;
+	color: #b5d7ab;
+	font-weight: 400;
+}
+
+#slider #infos a { display: inline-block; }
+#slider #infos a:not(:last-child) { margin-right: 0.7em; }
+
+#slider #infos #reseaux-sociaux a img { height: 1.3em; }
+
+/************/
+/*** MAIN ***/
+/************/
+
+main {
+	position: relative;
+	height: 100%;
+}
+
+#overlay {
+	z-index: 99;
+	position: fixed;
+	top: -25vh;
+	bottom: -25vh;
+	left: -25vh;
+	right: -25vh;
+	background: black;
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.2s ease-in-out;
+}
+body.menu-open #overlay {
+	visibility: visible;
+	opacity: 0.4;
+}
+
+/*** Header ***/
+
+main header#fullpage {
+	position: relative;
+	height: 100%;
+	background-color: #385b76;
+	background-image: url(../img/banners/header.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+main header#fullpage div {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: url(../img/banners/header.svg) center center no-repeat;
+	background-size: cover;
+}
+
+/*** Bar ***/
+
+#bar {
+	position: absolute;
+	z-index: 50;
+	height: 9rem;
+	width: 100%;
+	text-align: center;
+	border-bottom: 0.2rem solid #b5d7ab;
+	background: #385b76;
+}
+#bar.fixed {
+	position: fixed;
+	top: 0;
+}
+
+#bar #logo {
+	position: relative;
+	height: 100%;
+}
+
+#bar #logo img {
+	height: calc(100% - 2rem);
+	padding: 1rem;
+	margin: auto;
+}
+
+#bar #menu-icon, #bar #search-icon {
+	position: absolute;
+	width: 9rem;
+	height: 9rem;
+	top: 0;
+	cursor: pointer;
+}
+#bar #menu-icon { left: 0; }
+#bar #search-icon { right: 0; }
+
+#bar #menu-icon .menu-icon-line {
+	background: #b5d7ab;
+	transition: 0.15s ease-in-out;
+}
+
+#bar #search-icon .search-icon {
+	height: 100%;
+	height: 100%;
+	background: url(../img/icons/icon-search.svg) center center;
+	background-size: contain;
+}
+
+/*** Main-content ***/
+
+#main-content {
+    min-height: calc(100% - 12rem - 10rem);
+	padding: 9rem 0 3rem;
+}
+
+#main-content section:not(:first-child)>*:first-child { margin-top: 3rem; }
+
+#main-content h1,
+#main-content #sec-halle-au-frais h2,
+#main-content #sec-home-actualites h2 {
+    position: relative;
+    left: 2.4rem;
+    width: calc(100% - 4.8rem);
+	font-weight: 600;
+	font-size: 3rem;
+	color: #385b76;
+	text-transform: uppercase;
+    letter-spacing: 0.15rem;
+}
+
+#main-content h1:after,
+#main-content #sec-halle-au-frais h2:after,
+#main-content #sec-home-actualites h2:after {
+	content: "";
+	position: absolute;
+	width: 0.5em;
+	height: 0.5em;
+    bottom: 0.2em;
+    margin-left: 0.1em;
+	background: #385b76;
+}
+
+#main-content h2,
+#main-content #sec-home-actualites h3 {
+	font-size: 2rem;
+	font-weight: 200;
+	font-family: "Fira Sans";
+	color: #b5d7ab;
+}
+
+#main-content p {
+	font-size: 1.8rem;
+	line-height: 1.1em;
+	text-align: justify;
+}
+#main-content p:not(:last-child) { margin-bottom: 0.6em; }
+
+#main-content #map-container { position: relative; }
+
+#main-content #map {
+    position: relative;
+    width: calc(100% + 6rem);
+    left: -3rem;
+}
+
+#main-content #map-info {
+    position: absolute;
+    width: 50%;
+    top: 3em;
+    right: 0;
+    padding: 1.5em;
+    background: #b5d7ab;
+}
+
+#main-content #map-info>*:first-child { margin-bottom: 1rem; }
+
+#main-content #map-info p {
+	margin: 0;
+	font-size: 1.5rem;
+    text-align: left;
+}
+
+#main-content #sec-home-actualites article:not(:last-child) { margin-bottom: 2rem; }
+
+#main-content #sec-home-actualites article>a>div {
+	position: relative;
+	height: 23rem;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+#main-content #sec-home-actualites article .title {
+	position: absolute;
+    width: calc(100% - 2rem);
+    bottom: 0;
+	padding: 1rem;
+	background: #385b76;
+}
+
+#main-content #sec-home-actualites article h4 {
+	margin: 1rem 1rem 0;
+	font-size: 1.8em;
+	font-weight: 600;
+	color: #385b76;
+}
+
+#main-content #sec-home-actualites article p {
+	margin-top: 0.2em;
+	margin-left: 1rem;
+	font-size: 1.5em;
+	color: rgba(0,0,0,0.75);
+}
+
+#main-content #sec-types-actualites h1 { color: white; }
+#main-content #sec-types-actualites h1:after { background: white; }
+#main-content #sec-types-actualites h1:before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: calc(100% + 4.5rem);
+    width: calc(100% + 10.8rem);
+    top: -3rem;
+    left: -5.4rem;
+    background: #385b76;
+    z-index: -1;
+}
+
+/* cur */
+
+#main-content .slide-menu-container {
+	position: relative;
+	width: calc(100% + 6em);
+	left: -3em;
+	background: #385b76;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+#main-content .slide-menu { white-space: nowrap; }
+
+#main-content .slide-menu a { display: inline-block; }
+
+#main-content .slide-menu div {
+	position: relative;
+	display: inline-block;
+	padding: 2rem;
+	font-size: 1.25rem;
+}
+
+#main-content .slide-menu a div:after {
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+    transition: 0.25s;
+}
+#main-content .slide-menu a.active div:after {
+	height: 0.5em;
+    background: #b5d7ab;
+    transition: 0.25s;
+}
+
+#main-content #sec-actualites {
+	margin-top: 1.5rem;
+}
+
+/*** Footer ***/
+
+main footer {
+	height: 10rem;
+	background-color: #385b76;
+	background-image: url(../img/banners/footer.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+/***************************/
+/*** SIMPLEGRID OVERRIDE ***/
+/***************************/
+
+/*** Margins (px to em) ***/
+
+[class*='col-'] { padding-right: 1.5em; }
+
+[class*='mobile-col-'] { margin: 0 0 1.5em; }
+
+.grid-pad {
+	padding-top: 3em;
+	padding-left: 3em;
+}
+
+@media handheld, only screen and (max-width: 768px) {
+	.grid {
+		padding-left: 3em;
+		padding-right: 1.5em;
+	}
+}
+
+/*** Personnal changes ***/
+
+[class*='col-'], [class*='mobile-'] { position: relative; }
+
+[class*='mobile-col-']:last-child { margin-bottom: 0; }
+
+#slider #menu .grid { overflow: visible; }
+
+main #bar [class*='mobile-col-'] { margin: 0; }
+
+/**************/
+/*** KONAMI ***/
+/**************/
+
+@keyframes konami {
+  0%	{ filter:hue-rotate(0deg); }
+  100%	{ filter:hue-rotate(360deg); }
+}
+
+body.konami { animation: konami 1s infinite; }
+
+html {
+  height: 100%;
+  box-sizing: border-box;
 }

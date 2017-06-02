@@ -10,22 +10,16 @@ require_once 'models/article.php';
 require_once 'models/type_article.php';
 
 require_once 'libs/flight/Flight.php';
-require_once 'controllers/controller.php';
+require_once 'controllers/main.php';
+require_once 'controllers/ajax.php';
 
-Flight::route('/', function() {
-	Flight::redirect('/articles');
-});
+Flight::route('/', 'la_halle');
+Flight::route('/actualites(/@slug)', 'actualites');
+Flight::route('/actualite/@slug', 'actualite');
 
-Flight::route('*', function() {
-	$article = Model::factory('Article')->find_one(4);
-	return true;
-});
-Flight::route('/articles', 'articles');
-Flight::route('/article/@name', 'article');
+Flight::route('/ajax/actualites/load_actualites_list/@slug', 'load_actualites_list');
 
-Flight::route('/ajax/articles/reload/@slug', 'ajax_articles_reload');
-
-Flight::map('notFound', 'notFound');
+Flight::map('notFound', 'error404');
 
 Flight::start();
 
